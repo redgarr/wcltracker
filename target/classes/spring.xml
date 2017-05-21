@@ -43,5 +43,7 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
+    <bean id="restCaller" class="com.brynhagen.rest.RestCaller" scope="singleton">
+    </bean>
 
 </beans>

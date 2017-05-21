@@ -1,8 +1,7 @@
 package com.brynhagen;
 
-import com.brynhagen.framework.spring.HibernateDao;
 import com.brynhagen.framework.spring.HibernateDaoImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.brynhagen.rest.RestCaller;
 import org.springframework.beans.factory.annotation.Configurable;
 
 import javax.swing.*;
@@ -30,8 +29,8 @@ public class TestButton extends JButton {
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(hibernateDaoImpl);
-                TestButton.this.setText(Integer.toString(hibernateDaoImpl.getPlayerCount()));
+//                TestButton.this.setText(Integer.toString(hibernateDaoImpl.getPlayerCount()));
+                RestCaller.getInstance().getUser("redgarr");
             }
         });
     }
