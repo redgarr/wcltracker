@@ -30,7 +30,6 @@ public class TestButton extends JButton {
             @Override
             public void actionPerformed(ActionEvent e) {
 //                TestButton.this.setText(Integer.toString(hibernateDaoImpl.getPlayerCount()));
-                RestCaller.getInstance().getUser("redgarr");
             }
         });
     }

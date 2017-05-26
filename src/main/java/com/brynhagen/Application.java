@@ -1,6 +1,8 @@
 package com.brynhagen;
 
 import com.brynhagen.framework.spring.HibernateDaoImpl;
+import com.brynhagen.gui.MainFrame;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
