@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 
+import com.brynhagen.framework.spring.HibernateDaoImpl;
+
 /**
  * Created by jonathan on 26/05/17.
  */
@@ -14,11 +16,14 @@ public class GraphPane
 	extends JPanel
 {
 
-	GraphPanel graphPanel;
+	private GraphPanel graphPanel;
+	private GraphController controller;
 
-	public GraphPane()
+	public GraphPane(GraphController controller)
 	{
-//		setPreferredSize(new Dimension(750, 400));
+		this.controller = controller;
+		controller.setGraphPane(this);
+		//		setPreferredSize(new Dimension(750, 400));
 		setLayout(new MigLayout("", "[][grow, fill]", "[10%][90%]"));
 		setBackground(ClientConstants.paneContentBackgroundColor);
 		init();
@@ -26,10 +31,10 @@ public class GraphPane
 
 	private void init()
 	{
-		graphPanel = new GraphPanel();
+		graphPanel = new GraphPanel(controller);
 
-		add(new GraphSettingPane(), "skip, wrap");
-		add(new GraphToolbar(graphPanel));
+		add(new GraphSettingPane(controller), "skip, wrap");
+		add(new GraphToolbar(graphPanel, controller));
 		add(graphPanel, "grow");
 	}
 }

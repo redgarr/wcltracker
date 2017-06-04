@@ -8,8 +8,11 @@ import java.awt.Color;
 public class ClientConstants
 {
 
-	public static Color contentBackgroundColor = new Color(41, 41, 41);
-	public static Color paneContentBackgroundColor = new Color(56, 56, 56);
+	public static Color contentBackgroundColor = new Color(0x1E1E1E);
+	public static Color paneContentBackgroundColor = new Color(0x2E2F2F);
+	public static Color graphToolbarTextColor = new Color(0xEB8921);
+	public static Color graphToolbarTextColorLighter = new Color(0xF5AD28);
+
 
 	public static Color greenRankingColor = new Color(25, 194, 3);
 	public static Color blueRankingColor = new Color(0, 110, 251);

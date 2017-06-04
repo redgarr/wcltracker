@@ -4,7 +4,9 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 
+import com.brynhagen.framework.spring.HibernateDaoImpl;
 import com.brynhagen.gui.ClientConstants;
+import com.brynhagen.gui.GraphController;
 import com.brynhagen.gui.GraphPane;
 
 /**
@@ -14,8 +16,11 @@ public class RankingsTab
 	extends JPanel
 {
 
-	public RankingsTab()
+	private GraphController controller;
+
+	public RankingsTab(GraphController controller)
 	{
+		this.controller = controller;
 		init();
 		setName("Rankings");
 		setBackground(ClientConstants.paneContentBackgroundColor);
@@ -24,6 +29,6 @@ public class RankingsTab
 
 	private void init()
 	{
-		add(new GraphPane(), "grow");
+		add(new GraphPane(controller), "grow");
 	}
 }

@@ -12,12 +12,33 @@ import javax.swing.JPanel;
 
 import org.joda.time.DateTime;
 
+import com.brynhagen.entity.Ranking;
+
 /**
  * Created by jonathan on 26/05/17.
  */
 public class GraphPanel
 	extends JPanel
 {
+	private GraphController controller;
+
+	public void updateRankings(List<Ranking> rankingsList)
+	{
+		dataPoints = new ArrayList();
+		for(Ranking ranking : rankingsList)
+		{
+			int rank = ranking.getRank();
+			int outOf = ranking.getOutOf();
+			float percentile = ((float)rank / (float)outOf ) * 100;
+			System.out.println("Adding dataPoint with percentile: " + percentile);
+			if(ranking.getDifficulty() == Ranking.DIFFICULTY.HEROIC)
+			{
+				dataPoints.add(new DataPoint(new DateTime(ranking.getStartTime()), (int)percentile));
+			}
+		}
+
+		repaint();
+	}
 
 	private class DataPoint
 	{
@@ -42,19 +63,16 @@ public class GraphPanel
 		}
 	}
 
-	DataPoint p1 = new DataPoint(new DateTime(1495187092000l), 500);
-	DataPoint p2 = new DataPoint(new DateTime(1495273492000l), 600);
-	DataPoint p3 = new DataPoint(new DateTime(1495359892000l), 800);
 	private List<DataPoint> dataPoints;
+	private int highestValue;
 	private final int GRAPH_PADDING = 40;
 
-	public GraphPanel()
+	public GraphPanel(GraphController controller)
 	{
+		this.controller = controller;
+		controller.setGraphPanel(this);
 		setBackground(ClientConstants.paneContentBackgroundColor);
 		dataPoints = new ArrayList();
-		dataPoints.add(p1);
-		dataPoints.add(p2);
-		dataPoints.add(p3);
 
 	}
 
@@ -69,7 +87,8 @@ public class GraphPanel
 
 
 		int height = getHeight() - 30;
-		int maxScore = dataPoints.stream().mapToInt(DataPoint::getValue).max().orElse(0);
+		//int maxScore = dataPoints.stream().mapToInt(DataPoint::getValue).max().orElse(0);
+		int maxScore = 100;
 		g.setColor(ClientConstants.contentBackgroundColor);
 		g.fillRect(0,0,getWidth(), height);
 
@@ -91,9 +110,10 @@ public class GraphPanel
 
 		double xScale = ((double) getWidth() - 2 * GRAPH_PADDING) / (dataPoints.size() - 1);
 		double yScale = ((double) height - 2 * GRAPH_PADDING) / (maxScore - 1);
-
+		System.out.println("dataPoints = " + dataPoints.size());
 		for(int i=0; i<dataPoints.size(); i++)
 		{
+			System.out.println("test");
 			int x = (int)(i*xScale + GRAPH_PADDING);
 			int y = (int)((maxScore - dataPoints.get(i).getValue())*yScale + GRAPH_PADDING);
 

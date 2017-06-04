@@ -1,7 +1,12 @@
 package com.brynhagen;
 
 import com.brynhagen.framework.spring.HibernateDaoImpl;
+
+import com.brynhagen.gui.GraphController;
 import com.brynhagen.gui.MainFrame;
+
+
+import com.brynhagen.rest.RestCaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,12 +37,12 @@ public class Application {
 
     @Bean
     @Autowired
-    public int createMainFrame(HibernateDaoImpl hibernateDaoImpl)
+    public int createMainFrame(RestCaller caller, GraphController controller)
     {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                MainFrame mainFrame = new MainFrame(hibernateDaoImpl);
+                MainFrame mainFrame = new MainFrame(caller, controller);
                 mainFrame.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent e) {

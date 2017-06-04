@@ -31,7 +31,12 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="317c40fe-f426-406f-a58a-249895ad7b44">
-      <console name="Localhost" type="STANDARD" />
+      <console name="Localhost" type="STANDARD"><![CDATA[use database wcltracker;
+CREATE TABLE player (
+id VARCHAR(25) PRIMARY KEY,
+name VARCHAR(30) NOT NULL,
+playerClass VARCHAR(15)
+);]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
